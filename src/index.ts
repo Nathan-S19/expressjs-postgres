@@ -29,6 +29,7 @@ app.post("/form", async (req, res) => {
     res.send("Success!");
   } catch (e) {
     console.error(e);
+    res.status(500).send("Error");
   }
 });
 
