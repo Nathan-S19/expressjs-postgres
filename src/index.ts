@@ -19,6 +19,19 @@ app.get("/", async (req, res) => {
   res.send(`Hello, World! The time from the DB is ${rows[0].now}`);
 });
 
+app.post("/form", async (req, res) => {
+  try {
+    const { firstName, lastName, email, country, pushNotifications } = req.body;
+    await pool.query(
+      "INSERT INTO newformdata (firstName, lastName, email, country, pushNotifications) VALUES ($1, $2, $3, $4, $5)",
+      [firstName, lastName, email, country, pushNotifications]
+    );
+    res.send("Success!");
+  } catch (e) {
+    console.error(e);
+  }
+});
+
 // router.post("/api/v1/submit", async (req, res) => {
 //   // send data to database
 //   try {
